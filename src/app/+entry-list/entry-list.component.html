@@ -1,5 +1,6 @@
 <ul class="list-group">
     <entry *ngFor="let entry of entries" [entry]="entry"></entry>
+    <entry [entry]="newEntry" [editMode]="true"></entry>
 </ul>
 
 <div class="pull-right">

@@ -26,5 +26,9 @@ export class EntryService {
   getEntries() {
       return Promise.resolve(this.ENTRIES);
   }
+  
+  addEntry(entry: Entry) {
+    this.ENTRIES.push(entry);
+  }
 
 }

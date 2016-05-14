@@ -14,6 +14,14 @@ import { EntryComponent } from '../entry/entry.component';
 export class EntryListComponent implements OnInit {
 
   entries: Entry[];
+  //TODO why can't we use the default constructor here?
+  newEntry: Entry = {
+    checkNumber: 3,
+    timestamp: new Date(),
+    description: "fdsfa",
+    credit: 1,
+    debit: 0
+  };
 
   constructor(private entryService : EntryService) {}
 
