@@ -3,5 +3,5 @@ export class Entry  {
     checkNumber: number;
     debit: number;
     credit: number = 0;
-    
+    description: string;
 }

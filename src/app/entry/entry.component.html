@@ -1,6 +1,13 @@
-<li class="list-group-item">
+<li class="list-group-item" [class.list-group-item-success]="entry.credit > 0">
     <div class="row">
-    <div class="col-lg-3">{{entry.timestamp}}</div>
-    <div class="col-lg-3">{{entry.checkNumber}}</div>
+        <div class="col-lg-1">{{entry.checkNumber}}</div>
+        <div class="col-lg-3">{{entry.timestamp | date}}</div>
+        <div class="col-lg-5"><em>{{entry.description}}</em></div>
+        <div class="col-lg-3">
+            <div class="pull-right">
+                <span *ngIf="entry.debit > 0" class="text-danger"><strong>- ${{entry.debit}}</strong></span>
+                <span *ngIf="entry.credit > 0" class="text-success"><strong>+ ${{entry.credit}}</strong></span>
+            </div>
+        </div>
     </div>    
 </li>

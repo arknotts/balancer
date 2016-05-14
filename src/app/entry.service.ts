@@ -9,13 +9,15 @@ export class EntryService {
       timestamp: new Date(),
       checkNumber: 1,
       debit: 23.40,
-      credit: 0
+      credit: 0,
+      description: "Luigi Vet"
     },
     {
       timestamp: new Date(),
       checkNumber: 2,
-      debit: 23.40,
-      credit: 0
+      debit: 0,
+      credit: 25.40,
+      description: "Corvette Exhaust"
     },
   ]
 
