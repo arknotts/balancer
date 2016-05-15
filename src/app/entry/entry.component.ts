@@ -6,8 +6,7 @@ import { EntryService } from '../entry.service';
   moduleId: module.id,
   selector: 'entry',
   templateUrl: 'entry.component.html',
-  styleUrls: ['entry.component.css'],
-  providers: [EntryService]
+  styleUrls: ['entry.component.css']
 })
 export class EntryComponent implements OnInit {
 

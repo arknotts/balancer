@@ -26,7 +26,15 @@ export class EntryListComponent implements OnInit {
   constructor(private entryService : EntryService) {}
 
   ngOnInit() {
-    this.entryService.getEntries().then(entries => this.entries = entries);
+    // this.entryService.getEntries().then(entries => this.entries = entries);
+    
+    this.entryService.entries$.subscribe(updatedEntries => {
+      this.entries = updatedEntries;
+    });
+    
+    this.entryService.loadAll();
+    
+    // this.entries = this.entryService.entries$;
   }
 
 }

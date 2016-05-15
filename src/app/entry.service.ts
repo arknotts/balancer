@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Entry } from './entry';
+import { Observable } from 'rxjs/Observable';
+import { Observer } from 'rxjs/Observer';
+import 'rxjs/add/operator/share';
 
 @Injectable()
 export class EntryService {
@@ -19,16 +22,26 @@ export class EntryService {
       credit: 25.40,
       description: "Corvette Exhaust"
     },
-  ]
-
-  constructor() {}
+  ];
   
-  getEntries() {
-      return Promise.resolve(this.ENTRIES);
+  entries$: Observable<Entry[]>;
+  private _entriesObserver: Observer<Entry[]>;
+
+  constructor() {
+    this.entries$ = new Observable(observer => this._entriesObserver = observer).share();
   }
+  
+  loadAll() {
+    this._entriesObserver.next(this.ENTRIES);
+  }
+  
+  // getEntries() {
+  //     return Promise.resolve(this.ENTRIES);
+  // }
   
   addEntry(entry: Entry) {
     this.ENTRIES.push(entry);
+    this._entriesObserver.next(this.ENTRIES);
   }
 
 }
