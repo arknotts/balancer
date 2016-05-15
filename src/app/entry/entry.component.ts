@@ -12,8 +12,6 @@ export class EntryComponent implements OnInit {
 
   @Input()
   entry: Entry;
-  @Input()
-  editMode: boolean = false;
 
   constructor(private entryService: EntryService) {}
 
@@ -21,8 +19,6 @@ export class EntryComponent implements OnInit {
     
   }
   
-  addEntry(entry: Entry) {
-    this.entryService.addEntry(entry);
-  }
+  
 
 }

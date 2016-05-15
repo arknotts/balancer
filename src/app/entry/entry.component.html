@@ -1,5 +1,5 @@
-<li class="list-group-item" [class.list-group-item-success]="entry.credit > 0">
-    <div class="row" *ngIf="editMode == false">
+<li class="list-group-item" [class.list-group-item-success]="entry.credit > 0" [class.list-group-item-danger]="entry.debit > 0">
+    <div class="row">
         <div class="col-lg-1">{{entry.checkNumber}}</div>
         <div class="col-lg-3">{{entry.timestamp | date}}</div>
         <div class="col-lg-5"><em>{{entry.description}}</em></div>
@@ -8,20 +8,6 @@
                 <span *ngIf="entry.debit > 0" class="text-danger"><strong>- ${{entry.debit}}</strong></span>
                 <span *ngIf="entry.credit > 0" class="text-success"><strong>+ ${{entry.credit}}</strong></span>
             </div>
-        </div>
-    </div>
-    <div class="row" *ngIf="editMode">
-        <div class="col-lg-1"><input type="text" [(ngModel)]="entry.checkNumber" placeholder="Chk No" style="width: 70px"/></div>
-        <div class="col-lg-3"><input type="text" [(ngModel)]="entry.timestamp" placeholder="Date"/></div>
-        <div class="col-lg-4"><input type="text" [(ngModel)]="entry.description" placeholder="Description" style="width:100%" /></div>
-        <div class="col-lg-3">
-            <div class="pull-right">
-                $<input type="number" [(ngModel)]="entry.debit" placeholder="Debit" style="width: 70px" />
-                $<input type="number" [(ngModel)]="entry.credit" placeholder="Credit" style="width: 70px" />
-            </div>
-        </div>
-        <div class="col-lg-1">
-            <button type="button" class="btn btn-info btn-sm pull-right" (click)="addEntry(entry)">+</button>
         </div>
     </div>
 </li>

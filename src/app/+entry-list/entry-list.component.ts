@@ -16,12 +16,13 @@ export class EntryListComponent implements OnInit {
   entries: Entry[];
   //TODO why can't we use the default constructor here?
   newEntry: Entry = {
-    checkNumber: 3,
-    timestamp: new Date(),
-    description: "fdsfa",
-    credit: 1,
-    debit: 0
-  };
+      checkNumber: null,
+      timestamp: new Date(),
+      description: null,
+      credit: null,
+      debit: null
+    };
+  STARTING_BALANCE: number = 0;
 
   constructor(private entryService : EntryService) {}
 
@@ -35,6 +36,32 @@ export class EntryListComponent implements OnInit {
     this.entryService.loadAll();
     
     // this.entries = this.entryService.entries$;
+  }
+  
+  addEntry(entry: Entry) {
+    this.entryService.addEntry(entry);
+    this.newEntry = {
+      checkNumber: null,
+      timestamp: new Date(),
+      description: null,
+      credit: null,
+      debit: null
+    };
+  }
+  
+  getTotal() {
+    var total: number = this.STARTING_BALANCE;
+    
+    this.entries.forEach(element => {
+      if(element.debit != null) {
+        total -= element.debit;
+      }
+      if(element.credit != null) {
+        total += element.credit;
+      }
+    });
+    
+    return total;
   }
 
 }
