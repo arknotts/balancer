@@ -12,7 +12,9 @@ module.exports = function(defaults) {
       'reflect-metadata/*.js',
       'rxjs/**/*.js',
       '@angular/**/*.js',
-      'bootstrap/dist/css/*'
+      'bootstrap/dist/css/*',
+      'bootstrap/dist/js/*',
+      'jquery/dist/*'
     ]
   });
 };

@@ -19,6 +19,8 @@ export class EntryComponent implements OnInit {
     
   }
   
-  
+  delete(entry: Entry) {
+    this.entryService.deleteEntry(entry);
+  }
 
 }

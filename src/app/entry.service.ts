@@ -43,5 +43,17 @@ export class EntryService {
     this.ENTRIES.push(entry);
     this._entriesObserver.next(this.ENTRIES);
   }
+  
+  deleteEntry(entry: Entry) {
+    for(var i = 0; i<this.ENTRIES.length; i++)
+    {
+      if(this.ENTRIES[i].checkNumber == entry.checkNumber) 
+      {
+        this.ENTRIES.splice(i, 1);
+      }
+    }
+    
+    this._entriesObserver.next(this.ENTRIES);
+  }
 
 }
