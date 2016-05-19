@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Entry } from '../entry';
 import { EntryService } from '../entry.service';
 import { EntryComponent } from '../entry/entry.component';
+import { EntryEditComponent } from '../entry-edit/entry-edit.component';
 
 @Component({
   moduleId: module.id,
@@ -9,7 +10,7 @@ import { EntryComponent } from '../entry/entry.component';
   templateUrl: 'entry-list.component.html',
   styleUrls: ['entry-list.component.css'],
   providers: [EntryService],
-  directives: [EntryComponent]
+  directives: [EntryComponent, EntryEditComponent]
 })
 export class EntryListComponent implements OnInit {
 
@@ -36,17 +37,6 @@ export class EntryListComponent implements OnInit {
     this.entryService.loadAll();
     
     // this.entries = this.entryService.entries$;
-  }
-  
-  addEntry(entry: Entry) {
-    this.entryService.addEntry(entry);
-    this.newEntry = {
-      checkNumber: null,
-      timestamp: new Date(),
-      description: null,
-      credit: null,
-      debit: null
-    };
   }
   
   getTotal() {
