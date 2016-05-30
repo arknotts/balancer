@@ -3,7 +3,7 @@
     
     <li class="list-group-item">
         <div class="row">
-            <div class="col-lg-1"><input type="text" [(ngModel)]="newEntry.checkNumber" placeholder="Chk No" style="width: 70px"/></div>
+            <div class="col-lg-1"><input type="number" [(ngModel)]="newEntry.checkNumber" placeholder="Chk No" style="width: 70px"/></div>
             <div class="col-lg-3"><input type="text" [(ngModel)]="newEntry.timestamp" placeholder="Date"/></div>
             <div class="col-lg-4"><input type="text" [(ngModel)]="newEntry.description" placeholder="Description" style="width:100%" /></div>
             <div class="col-lg-3">
@@ -20,5 +20,5 @@
 </ul>
 
 <div class="pull-right">
-    <h4>${{getTotal()}}</h4>
+    <h3><span class="text-muted">Balance: </span><span [class.text-warning]="getTotal() < 50" [class.text-danger]="getTotal() < 0">{{getTotal() | currency:'USD':true}}</span></h3>
 </div>
