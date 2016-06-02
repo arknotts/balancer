@@ -61,7 +61,7 @@ export class EntryService {
     e.checkNumber = 1;
     e.debit = 23.40;
     e.credit = 0;
-    e.description = "Luigi Vet";
+    e.description = "test 1";
     this.ENTRIES.push(e);
     
     e = new Entry();
@@ -70,7 +70,7 @@ export class EntryService {
     e.checkNumber = 2;
     e.debit = 0;
     e.credit = 25;
-    e.description = "Corvette Exhaust";
+    e.description = "test 2";
     this.ENTRIES.push(e);
     
     this.entries$ = new Observable(observer => this._entriesObserver = observer).share();

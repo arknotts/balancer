@@ -1,21 +1,20 @@
-<li class="list-group-item" [class.list-group-item-success]="entry.credit > 0" [class.list-group-item-danger]="entry.debit > 0">
-    <div class="row">
-        <div class="col-lg-1">
-            <div class="btn-group">
-                <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#" (click)="delete(entry)">Delete</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-1">{{entry.checkNumber}}</div>
-        <div class="col-lg-3">{{entry.timestamp}}</div>
-        <div class="col-lg-4"><em>{{entry.description}}</em></div>
-        <div class="col-lg-3">
-            <div class="pull-right">
-                <span *ngIf="entry.debit > 0" class="text-danger"><strong>- ${{entry.debit}}</strong></span>
-                <span *ngIf="entry.credit > 0" class="text-success"><strong>+ ${{entry.credit}}</strong></span>
-            </div>
+<!--<td>
+    <div class="btn-group">
+        <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="#" (click)="delete(entry)">Delete</a>
         </div>
     </div>
-</li>
+</td>-->
+<td>{{entry.checkNumber}}</td>
+<td>{{entry.timestamp}}</td>
+<td><em>{{entry.description}}</em></td>
+<td>
+    <div class="pull-right">
+        <span *ngIf="entry.debit > 0" class="text-danger"><strong>- ${{entry.debit}}</strong></span>
+        <span *ngIf="entry.credit > 0" class="text-success"><strong>+ ${{entry.credit}}</strong></span>
+    </div>
+</td>
+<td>
+    <button type="button" class="btn btn-xs btn-danger pull-right" (click)="delete(entry)"><i class="fa fa-trash"></i></button>
+</td>

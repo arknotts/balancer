@@ -1,7 +1,17 @@
-<ul class="list-group">
-    <entry *ngFor="let entry of entries" [entry]="entry"></entry>
-</ul>
-<br>
+<table class="table table-sm">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Date</th>
+            <th></th>
+            <th><div class="pull-right">Amount</div></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let entry of entries" [entry]="entry" [class.table-success]="entry.credit > 0" [class.table-danger]="entry.debit > 0"></tr>    
+    </tbody>
+</table>
 
 <div class="pull-xs-right">
     <h3><span class="text-muted">Balance: </span><span [class.text-warning]="getTotal() < 50" [class.text-danger]="getTotal() < 0">{{getTotal() | currency:'USD':true}}</span></h3>

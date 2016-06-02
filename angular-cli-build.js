@@ -14,7 +14,9 @@ module.exports = function(defaults) {
       '@angular/**/*.js',
       'bootstrap/dist/css/*',
       'bootstrap/dist/js/*',
-      'jquery/dist/*'
+      'jquery/dist/*',
+      'font-awesome/css/*',
+      'font-awesome/fonts/*'
     ]
   });
 };

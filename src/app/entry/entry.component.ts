@@ -4,7 +4,7 @@ import { EntryService } from '../entry.service';
 
 @Component({
   moduleId: module.id,
-  selector: 'entry',
+  selector: '[entry]',
   templateUrl: 'entry.component.html',
   styleUrls: ['entry.component.css']
 })
