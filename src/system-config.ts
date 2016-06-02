@@ -33,6 +33,7 @@ const barrels: string[] = [
   'app/entry-list',
   'app/+entries',
   'app/+entry-list',
+  'app/entry-edit',
   /** @cli-barrel */
 ];
 

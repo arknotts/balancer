@@ -1,7 +1,10 @@
-export class Entry  {
-    timestamp: Date;
-    checkNumber: number;
-    debit: number;
-    credit: number = 0;
-    description: string;
-}
+// export class Entry  {
+//     constructor() {
+//     }
+    
+//     timestamp: Date;
+//     checkNumber: number;
+//     debit: number;
+//     credit: number = 0;
+//     description: string;
+// }

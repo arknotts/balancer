@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Entry } from '../entry';
+import { Entry } from '../entry.service';
 import { EntryService } from '../entry.service';
 
 @Component({
@@ -19,6 +19,8 @@ export class EntryComponent implements OnInit {
     
   }
   
-  
+  delete(entry: Entry) {
+    this.entryService.deleteEntry(entry);
+  }
 
 }
