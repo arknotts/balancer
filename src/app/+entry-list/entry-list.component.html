@@ -9,7 +9,8 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let entry of entries" [entry]="entry" [class.table-success]="entry.credit > 0" [class.table-danger]="entry.debit > 0"></tr>    
+        <tr *ngFor="let entry of entries" [entry]="entry" [class.table-success]="entry.credit > 0" [class.table-danger]="entry.debit > 0"></tr>
+        
     </tbody>
 </table>
 
@@ -20,6 +21,21 @@
 
 <br><br>
 <h4><i class="fa fa-plus"></i> New Entry</h4>
-<ul class="list-group">
-    <entry-edit [myEntry]="entry"></entry-edit>
-</ul>
+
+<table class="table table-sm">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Date</th>
+            <th></th>
+            <th><div class="pull-right">Amount</div></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr [entryEdit]="newEntry"></tr>
+    </tbody>
+</table>
+
+
+

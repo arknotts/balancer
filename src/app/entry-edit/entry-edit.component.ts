@@ -4,14 +4,14 @@ import { EntryService } from '../entry.service';
 
 @Component({
   moduleId: module.id,
-  selector: 'entry-edit',
+  selector: '[entryEdit]',
   templateUrl: 'entry-edit.component.html',
   styleUrls: ['entry-edit.component.css']
 })
 export class EntryEditComponent implements OnInit {
 
   @Input()
-  entry: Entry = new Entry();
+  entryEdit: Entry = new Entry();
 
   constructor(private entryService: EntryService) {}
 
@@ -28,7 +28,7 @@ export class EntryEditComponent implements OnInit {
   
   addEntry(entry: Entry) {
     this.entryService.addEntry(entry);
-    this.entry = new Entry();
+    this.entryEdit = new Entry();
     // this.entry = {
     //   checkNumber: null,
     //   timestamp: new Date(),
