@@ -1,13 +1,14 @@
-<td><input type="number" [(ngModel)]="entryEdit.checkNumber" placeholder="Chk No" style="width: 70px"/></td>
-<td><input type="date" [(ngModel)]="entryEdit.timestamp" placeholder="Date"/></td>
-<td><input type="text" [(ngModel)]="entryEdit.description" placeholder="Description" style="width:100%" /></td>
+<td><input type="number" [(ngModel)]="entryEdit.checkNumber" (keyup.enter)="addEntry()" placeholder="Chk No" style="width: 70px"/></td>
+<td><input type="date" [(ngModel)]="entryEdit.timestamp" (keyup.enter)="addEntry()" placeholder="Date"/></td>
+<td><input type="text" #inputDescription required [(ngModel)]="entryEdit.description" (keyup.enter)="addEntry()" placeholder="Description" style="width:100%" autofocus /></td>
 <td>
     <div class="pull-right">
         haha
-        $<input type="number" [(ngModel)]="entryEdit.debit" placeholder="Debit" style="width: 70px" />
-        $<input type="number" [(ngModel)]="entryEdit.credit" placeholder="Credit" style="width: 70px" />
+        $<input type="number" [(ngModel)]="entryEdit.debit" (keyup.enter)="addEntry()" placeholder="Debit" style="width: 70px" />
+        $<input type="number" [(ngModel)]="entryEdit.credit" (keyup.enter)="addEntry()" placeholder="Credit" style="width: 70px" />
     </div>
 </td>
 <td>
-    <button type="button" class="btn btn-info btn-sm pull-right" (click)="addEntry(entryEdit)">+</button>
+    <button type="button" class="btn btn-info btn-sm pull-right" (click)="addEntry()">+</button>
+    <i class="fa fa-exclamation-circle fa-2x text-danger" *ngIf="isValid == false"></i>
 </td>

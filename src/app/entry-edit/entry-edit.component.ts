@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Renderer, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { Entry } from '../entry.service';
 import { EntryService } from '../entry.service';
 
@@ -12,30 +12,49 @@ export class EntryEditComponent implements OnInit {
 
   @Input()
   entryEdit: Entry = new Entry();
+  
+  @ViewChild('inputDescription')
+  inputDescription: ElementRef;
+  
+  isValid: boolean = null;
 
-  constructor(private entryService: EntryService) {}
+  constructor(private entryService: EntryService, private renderer: Renderer) {}
 
   ngOnInit() {
-    //this.entry = this.entryService.getBlankEntry();
-    // {
-    //   checkNumber: null,
-    //   timestamp: new Date(),
-    //   description: null,
-    //   credit: null,
-    //   debit: null
-    // };
   }
   
-  addEntry(entry: Entry) {
-    this.entryService.addEntry(entry);
-    this.entryEdit = new Entry();
-    // this.entry = {
-    //   checkNumber: null,
-    //   timestamp: new Date(),
-    //   description: null,
-    //   credit: null,
-    //   debit: null
-    // };
+  ngAfterViewInit() {
+    
+  }
+  
+  validate() {
+    //TODO this still needs some work
+    var valid = this.entryEdit.description != null &&
+       this.entryEdit.timestamp != null &&
+       (this.entryEdit.credit == null || this.entryEdit.credit >= 0) &&
+       (this.entryEdit.debit == null || this.entryEdit.debit >= 0) &&
+       this.entryEdit.credit != this.entryEdit.debit;
+       
+    if(!valid) {
+      this.isValid = false;
+    }
+    else {
+      this.isValid = true;
+    }
+  }
+  
+  addEntry() {
+    this.validate();
+    
+    if(this.isValid) { 
+      this.entryService.addEntry(this.entryEdit);
+      this.entryEdit = new Entry();
+      
+      //re-focus description box
+      this.renderer.invokeElementMethod(this.inputDescription.nativeElement, "focus", []);
+      
+      this.isValid = true;
+    }
   }
 
 }
