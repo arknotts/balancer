@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Entry } from '../entry.service';
 import { EntryService } from '../entry.service';
 import { EntryComponent } from '../entry/entry.component';
@@ -9,7 +9,7 @@ import { EntryEditComponent } from '../entry-edit/entry-edit.component';
   selector: 'entry-list',
   templateUrl: 'entry-list.component.html',
   styleUrls: ['entry-list.component.css'],
-  providers: [EntryService],
+  providers: [],
   directives: [EntryComponent, EntryEditComponent]
 })
 export class EntryListComponent implements OnInit {
@@ -23,7 +23,6 @@ export class EntryListComponent implements OnInit {
 
   ngOnInit() {
     // this.entryService.getEntries().then(entries => this.entries = entries);
-    
     this.entryService.entries$.subscribe(updatedEntries => {
       this.entries = updatedEntries;
     });

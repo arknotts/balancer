@@ -27,32 +27,26 @@ export class Entry  {
     private __timestamp: Date = new Date();
 }
 
+export abstract class EntryService {
+  entries$: Observable<Entry[]>;
+  abstract loadAll();
+  abstract addEntry(entry: Entry);
+  abstract deleteEntry(entry: Entry);
+  abstract nextCheckNumber() : number;
+}
+
 @Injectable()
-export class EntryService {
+export class InMemoryEntryService extends EntryService {
 
   ENTRIES: Entry[]; 
-  // = [
-  //   {
-  //     timestamp: new Date()
-  //     checkNumber: 1,
-  //     debit: 23.40,
-  //     credit: 0,
-  //     description: "Luigi Vet"
-  //   },
-  //   {
-  //     timestamp: new Date(),
-  //     checkNumber: 2,
-  //     debit: 0,
-  //     credit: 25.40,
-  //     description: "Corvette Exhaust"
-  //   },
-  // ];
   
   entries$: Observable<Entry[]>;
-  private _entriesObserver: Observer<Entry[]>;
-  private idCounter: number = 10;
+  protected _entriesObserver: Observer<Entry[]>;
+  protected idCounter: number = 10;
 
   constructor() {
+    super();
+    
     this.ENTRIES = new Array<Entry>();
     
     var e = new Entry();
@@ -80,10 +74,6 @@ export class EntryService {
     this._entriesObserver.next(this.ENTRIES);
   }
   
-  // getEntries() {
-  //     return Promise.resolve(this.ENTRIES);
-  // }
-  
   addEntry(entry: Entry) {
     entry.id = this.idCounter;
     this.idCounter = this.idCounter + 1;
@@ -101,6 +91,15 @@ export class EntryService {
     }
     
     this._entriesObserver.next(this.ENTRIES);
+  }
+  
+  nextCheckNumber() : number {
+    let max : number = 1;
+    this.ENTRIES.forEach(function(entry: Entry) {
+      max = Math.max(entry.checkNumber, max);
+    });
+    
+    return max;
   }
 
 }
