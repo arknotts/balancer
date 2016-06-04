@@ -11,7 +11,7 @@ import { EntryService } from '../entry.service';
 export class EntryEditComponent implements OnInit {
 
   @Input()
-  entryEdit: Entry = new Entry();
+  entryEdit: Entry;
   
   @ViewChild('inputDescription')
   inputDescription: ElementRef;
@@ -21,6 +21,7 @@ export class EntryEditComponent implements OnInit {
   constructor(private entryService: EntryService, private renderer: Renderer) {}
 
   ngOnInit() {
+    this.entryEdit = this.newEditEntry();
   }
   
   ngAfterViewInit() {
@@ -48,13 +49,23 @@ export class EntryEditComponent implements OnInit {
     
     if(this.isValid) { 
       this.entryService.addEntry(this.entryEdit);
-      this.entryEdit = new Entry();
+      this.entryEdit = this.newEditEntry();
       
       //re-focus description box
       this.renderer.invokeElementMethod(this.inputDescription.nativeElement, "focus", []);
       
       this.isValid = true;
     }
+  }
+  
+  newEditEntry() : Entry {
+    var e = new Entry();
+    e.checkNumber = this.getNextCheckNumber();
+    return e;
+  }
+  
+  getNextCheckNumber() {
+    return this.entryService.nextCheckNumber();
   }
 
 }

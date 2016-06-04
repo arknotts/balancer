@@ -99,7 +99,7 @@ export class InMemoryEntryService extends EntryService {
       max = Math.max(entry.checkNumber, max);
     });
     
-    return max;
+    return max + 1;
   }
 
 }
