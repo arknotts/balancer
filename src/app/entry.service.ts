@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 import 'rxjs/add/operator/share';
+import 'rxjs/add/operator/map';
+import { Http, Response } from '@angular/http';
 
 export class Entry  {
   
@@ -33,6 +35,66 @@ export abstract class EntryService {
   abstract addEntry(entry: Entry);
   abstract deleteEntry(entry: Entry);
   abstract nextCheckNumber() : number;
+}
+
+@Injectable()
+export class APIEntryService extends EntryService {
+
+  ENTRIES: Entry[] = new Array<Entry>();
+  
+  entries$: Observable<Entry[]>;
+  protected _entriesObserver: Observer<Entry[]>;
+  // protected idCounter: number = 10;
+
+  constructor(private http: Http) {
+    super();
+
+    
+    this.entries$ = new Observable(observer => this._entriesObserver = observer).share();
+  }
+  
+  loadAll() {
+    this._entriesObserver.next(this.ENTRIES);
+  }
+  
+  addEntry(entry: Entry) {
+    this.http.post('http://localhost:3000/entries', JSON.stringify(entry))
+      .map(res => res.text())
+      .subscribe(
+        data => console.log("success:", data),
+        err => console.log("error:", err),
+        () => console.log('complete')
+      );
+    
+    
+    // entry.id = this.idCounter;
+    // this.idCounter = this.idCounter + 1;
+    // this.ENTRIES.push(entry);
+    // this._entriesObserver.next(this.ENTRIES);
+  }
+  
+  deleteEntry(entry: Entry) {
+    // for(var i = 0; i<this.ENTRIES.length; i++)
+    // {
+    //   if(this.ENTRIES[i].id == entry.id) 
+    //   {
+    //     this.ENTRIES.splice(i, 1);
+    //   }
+    // }
+    
+    // this._entriesObserver.next(this.ENTRIES);
+  }
+  
+  nextCheckNumber() : number {
+    return 5;
+    // let max : number = 1;
+    // this.ENTRIES.forEach(function(entry: Entry) {
+    //   max = Math.max(entry.checkNumber, max);
+    // });
+    
+    // return max + 1;
+  }
+
 }
 
 @Injectable()
