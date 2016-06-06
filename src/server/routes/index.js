@@ -11,14 +11,15 @@ var quotes = [
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  //res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Express23456' });
   //res.json(quotes);
+  //res.("worked");
 
-  // Use connect method to connect to the Server
-  req.db.connect(dbConfig.url, function(err, db) {
-    res.send("Connected correctly to server");
-    db.close();
-  });
+  // // Use connect method to connect to the Server
+  // req.db.connect(dbConfig.url, function(err, db) {
+  //   res.send("Connected correctly to server");
+  //   db.close();
+  // });
 });
 
 module.exports = router;

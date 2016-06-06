@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res) {
     req.db.connect(dbConfig.url, function(err, db) {
         var entry = req.body;
-        console.log(entry.credit);
+        console.log(entry);
         db.collection('entries').insertOne(entry);
         // Use the admin database for the operation
         // var adminDb = db.admin();
