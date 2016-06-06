@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 import 'rxjs/add/operator/share';
 import 'rxjs/add/operator/map';
-import { Http, Response } from '@angular/http';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
 export class Entry  {
   
@@ -40,6 +40,11 @@ export abstract class EntryService {
 @Injectable()
 export class APIEntryService extends EntryService {
 
+  private _headers : Headers = new Headers({
+    'Content-Type': 'application/x-www-form-urlencoded'
+  });
+  private _requestOptions: RequestOptions = new RequestOptions({headers: this._headers});
+
   ENTRIES: Entry[] = new Array<Entry>();
   
   entries$: Observable<Entry[]>;
@@ -58,7 +63,8 @@ export class APIEntryService extends EntryService {
   }
   
   addEntry(entry: Entry) {
-    this.http.post('http://localhost:3000/entries', JSON.stringify(entry))
+    let body = JSON.stringify(entry);
+    this.http.post('http://localhost:3000/entries', body, this._requestOptions)
       .map(res => res.text())
       .subscribe(
         data => console.log("success:", data),

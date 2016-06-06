@@ -10,25 +10,34 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res) {
     req.db.connect(dbConfig.url, function(err, db) {
-        
-        var adminDb = db.admin();
-        // List all the available databases
-        adminDb.listDatabases(function(err, dbs) {
-           // test.equal(null, err);
-            //test.ok(dbs.databases.length > 0);
-            console.log('num', dbs.databases.length);
-            db.close();
-        });
-        
-        //console.log(db);
-        var entries = db.collection('entries');
-        
         var entry = req.body;
-        console.log(entry);
+        console.log(entry.credit);
+        db.collection('entries').insertOne(entry);
+        // Use the admin database for the operation
+        // var adminDb = db.admin();
+        // console.log(dbConfig.url);
+        // List all the available databases
+        // adminDb.listDatabases(function(err, dbs) {
+        //     console.log(err);
+        //     console.log(dbs.databases);
+        //     //test.equal(null, err);
+        //     //test.ok(dbs.databases.length > 0);
+        //     db.close();
+        // });
         
-        collection.insert(entry, function(err, result) {
-            assert.equal(null, err);
-        });
+        // var balancerDb = db.balancer();
+        // console.log(balancerDb);
+        
+        // //console.log(db);
+        // var entries = balancerDb.collection('entries');
+        // console.log(entries);
+        
+        
+        //console.log(entry);
+        
+        // collection.insert(entry, function(err, result) {
+        //     assert.equal(null, err);
+        // });
         
         db.close();
         res.send("1");
