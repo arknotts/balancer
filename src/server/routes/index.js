@@ -11,7 +11,7 @@ var quotes = [
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express23456' });
+  res.render('index', { title: 'Express123456' });
   //res.json(quotes);
   //res.("worked");
 

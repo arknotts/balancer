@@ -10,20 +10,15 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res) {
     req.db.connect(dbConfig.url, function(err, db) {
-        var entry = req.body;
-        console.log(entry);
-        db.collection('entries').insertOne(entry);
-        // Use the admin database for the operation
-        // var adminDb = db.admin();
-        // console.log(dbConfig.url);
-        // List all the available databases
-        // adminDb.listDatabases(function(err, dbs) {
-        //     console.log(err);
-        //     console.log(dbs.databases);
-        //     //test.equal(null, err);
-        //     //test.ok(dbs.databases.length > 0);
-        //     db.close();
-        // });
+        //TODO this is really odd how this is retrieved
+        var entry = JSON.parse(Object.keys(req.body)[0]);
+        entry.timestamp = new Date(entry.timestamp);
+        db.collection('entries').insertOne(entry, function(err, result) {
+            assert.equal(null, err);
+            db.close();
+            res.send("1");
+        });
+
         
         // var balancerDb = db.balancer();
         // console.log(balancerDb);
@@ -39,8 +34,7 @@ router.post('/', function(req, res) {
         //     assert.equal(null, err);
         // });
         
-        db.close();
-        res.send("1");
+        
     });
 });
 
