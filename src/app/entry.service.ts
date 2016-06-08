@@ -22,7 +22,7 @@ export class Entry  {
     
     id: number;
     checkNumber: number;
-    debit: number;
+    debit: number = 0;
     credit: number = 0;
     description: string;
     
@@ -62,12 +62,18 @@ export class APIEntryService extends EntryService {
     this._entriesObserver.next(this.ENTRIES);
   }
   
+  private onEntryAdded(entry) {
+    console.log('on entry added', entry);
+    this.ENTRIES.push(entry);
+    this._entriesObserver.next(this.ENTRIES);
+  }
+
   addEntry(entry: Entry) {
     let body = JSON.stringify(entry);
     this.http.post('http://localhost:3000/entries', body, this._requestOptions)
       .map(res => res.text())
       .subscribe(
-        data => console.log("success:", data),
+        data => this.onEntryAdded(entry),
         err => console.log("error:", err),
         () => console.log('complete')
       );

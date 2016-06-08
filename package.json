@@ -6,7 +6,8 @@
   "scripts": {
     "server": "nodemon --watch .\\src\\server ./src/server/bin/www",
     "app": "ng server",
-    "start": "concurrently \"npm run server\" \"npm run app\"",
+    "db": "mongod",
+    "start": "concurrently \"npm run server\" \"npm run app\" \"npm run db\"",
     "postinstall": "typings install",
     "lint": "tslint \"src/**/*.ts\"",
     "format": "clang-format -i -style=file --glob=src/**/*.ts",
