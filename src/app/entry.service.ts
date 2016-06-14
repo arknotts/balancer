@@ -58,7 +58,17 @@ export class APIEntryService extends EntryService {
     this.entries$ = new Observable(observer => this._entriesObserver = observer).share();
   }
   
+  private onEntriesLoaded(entries) {
+
+  }
+
   loadAll() {
+    this.http.get('http://localhost:3000/entries')
+        .subscribe(
+          err => console.log("error:", err),
+          data => this.onEntriesLoaded(data)
+        );
+
     this._entriesObserver.next(this.ENTRIES);
   }
   
@@ -73,9 +83,8 @@ export class APIEntryService extends EntryService {
     this.http.post('http://localhost:3000/entries', body, this._requestOptions)
       .map(res => res.text())
       .subscribe(
-        data => this.onEntryAdded(entry),
         err => console.log("error:", err),
-        () => console.log('complete')
+        data => this.onEntryAdded(entry)
       );
     
     

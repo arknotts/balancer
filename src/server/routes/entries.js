@@ -3,16 +3,28 @@ var dbConfig = require('../config/database');
 var router = express.Router();
 var assert = require('assert');
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+router.get('/', function(req, res) {
+    //console.log(req.db.collection);
+    req.db.connect(dbConfig.url, function(err, db) {
+
+        var cursor = db.collection('entries').find({}, function(err, cursor) {
+            
+            var results = cursor.toArray();
+            console.log(results);
+            db.close();
+            //console.log(results);
+            
+            //res.send(results);
+        });
+        
+        
+    });
 });
-
-
 
 router.post('/', function(req, res) {
     //console.log(req.db.collection);
     req.db.connect(dbConfig.url, function(err, db) {
+        
         //TODO this is really odd how this is retrieved
         var entry = JSON.parse(Object.keys(req.body)[0]);
         entry.timestamp = new Date(entry.__timestamp);
@@ -23,21 +35,6 @@ router.post('/', function(req, res) {
             assert.equal(null, err);
             res.send("1");
         });
-
-        
-        // var balancerDb = db.balancer();
-        // console.log(balancerDb);
-        
-        // //console.log(db);
-        // var entries = balancerDb.collection('entries');
-        // console.log(entries);
-        
-        
-        //console.log(entry);
-        
-        // collection.insert(entry, function(err, result) {
-        //     assert.equal(null, err);
-        // });
         
         
     });
